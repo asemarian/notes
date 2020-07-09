@@ -1,0 +1,41 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin-top: 10rem;
+    margin-bottom: 0.5rem;
+}
+
+.logo>i {
+  font-size: 10rem;
+  color: var(--theme);
+}
+
+.title {
+    font-size: 4.5rem;
+    color: var(--secondary);
+}
+
+.partition {
+    width: 30rem;
+    background-image: linear-gradient(90deg, #ffffff00 1%, var(--secondary) 50%,  #ffffff00 99%);
+    height: 0.1rem;
+    border: none;
+}
+
+.paragraph {
+    color: var(--secondary);
+    font-size: 1.5rem;
+    margin: 1.5rem;
+}
+
+@media (max-width: 550px) {
+    .logo {
+        margin-top: 5rem;
+    }
+}

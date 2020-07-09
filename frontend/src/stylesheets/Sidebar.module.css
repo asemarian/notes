@@ -1,0 +1,30 @@
+.toolbar {
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.123);
+    height: 6rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list {
+    height: calc(100vh - 6rem);
+    width: 35rem;
+    overflow-y: auto;
+}
+
+.sidebar {
+    border-right: 0.1rem solid rgba(255, 255, 255, 0.103);
+}
+
+.button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--theme);
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

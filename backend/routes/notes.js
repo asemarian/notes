@@ -7,7 +7,7 @@ const router = new express.Router();
 
 router.post("/notes", auth, async (req, res) => {
     try {
-        const note = new Note({ title: req.body.title, body: req.body.body, author: req.user._id });
+        const note = new Note({ id: req.body.id, title: req.body.title, body: req.body.body, createdAt: req.body.createdAt, updatedAt: req.body.updatedAt, author: req.user._id });
         await note.save();
         res.json(note);
     } catch (e) {
@@ -30,6 +30,8 @@ router.patch("/notes/:id", async (req, res) => {
         if (!note) return res.status(404).send();
         note.title = req.body.title || note.title;
         note.body = req.body.body || note.body;
+        note.createdAt = req.body.createdAt || note.createdAt;
+        note.updatedAt = req.body.updatedAt || note.updatedAt;
         await note.save();
         res.send(note);
     } catch (e) {

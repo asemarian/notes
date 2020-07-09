@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const noteRouter = require('./routes/notes');
 const userRouter = require('./routes/users');
@@ -15,4 +16,4 @@ app.use(express.json());
 app.use(noteRouter);
 app.use(userRouter);
 
-app.listen(3000, () => console.log("Server is up and running"));
+app.listen(8080, () => console.log("Server is up and listening on 8080"));

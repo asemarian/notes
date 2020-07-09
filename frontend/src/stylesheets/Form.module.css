@@ -1,0 +1,60 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    margin: 1rem;
+}
+
+.input {
+    padding: 1.2rem 0.8rem;
+    border: 0.1rem solid var(--secondary);
+    border-radius: 0.5rem;
+    outline: none;
+    color: var(--secondary);
+    font-size: 1.5rem;
+    font-family: inherit;
+    background-color: var(--primary);
+    margin: 0.5rem 0;
+    transition: border 0.2s linear;
+}
+
+.input:focus {
+    border: 0.1rem solid var(--theme);
+}
+
+.button {
+    background-color: var(--theme);
+    color: var(--secondary);
+    border: 0.1rem solid transparent;
+    outline: none;
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: 1.2rem 0.8rem;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: border 0.2s linear;
+}
+
+.button:focus {
+    border: 0.1rem solid var(--secondary);
+}
+
+.message {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message>p {
+    color: #ff4040;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 330px) {
+    .form {
+        width: 91.5%;
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "redux": "^4.0.5",
+    "react-redux": "^7.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  },
+  "scripts": {
+    "start": "concurrently \"cd backend && npm run start\" \"cd frontend && npm start\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

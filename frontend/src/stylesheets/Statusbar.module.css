@@ -1,0 +1,12 @@
+.container {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--theme);
+    border: 0.1rem solid white;
+    padding: 1rem;
+    background-color: pink;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

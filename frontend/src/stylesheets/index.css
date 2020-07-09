@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&family=Mukta&family=Raleway&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--theme);
+  border: 0.3rem solid var(--primary);
+}
+
+:root {
+  --primary: #1d2027;
+  --secondary: #DEDDE3;
+  --theme: #7500A3;
+  font-size: 62.5%;
+  font-family: "Raleway",
+    sans-serif;
+}
+
+::selection {
+  color: var(--secondary);
+  background-color: var(--theme);
+}
+
+body {
+  background-color: var(--primary);
+}

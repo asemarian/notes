@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 100%;
+}
+
+.toolbar {
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.123);
+    height: 6rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper::after {
+    content: "";
+    border-top: 0.1rem solid #a5a0a01a;
+    width: 95%;
+    margin: 0 auto;
+    display: block;
+}
+
+.title {
+    background-color: var(--primary);
+    color: white;
+    font-family: inherit;
+    font-size: 3rem;
+    padding: 0 5rem;
+    text-align: start;
+    outline: none;
+    width: 100%;
+    border: none;
+    height: 5rem;
+}
+
+.body {
+    color: white;
+    background-color: var(--primary);
+    font-size: 2rem;
+    font-family: inherit;
+    height: calc(100vh - 11.1rem);
+    padding: 1rem 5rem;
+    outline: none;
+    border: none;
+    text-align: start;
+    resize: none;
+    width: 100%; 
+}
+
+.button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--theme);
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
