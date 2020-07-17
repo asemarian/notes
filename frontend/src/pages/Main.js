@@ -8,34 +8,28 @@ import Placeholder from '../components/Placeholder';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import { useLocation, useHistory } from 'react-router-dom';
-import Statusbar from '../components/Statusbar';
-
+import Spinner from '../components/Spinner';
 
 const Main = () => {
-
-    let noteList = []
-
-
     const auth = useContext(AuthContext);
     axios.defaults.headers.common['Authorization'] = "Bearer " + auth.token;
-
-
     const { id } = useParams();
-    const [notes, setNotes] = useState(noteList);
+    const [notes, setNotes] = useState([]);
     const [currentNote, setNote] = useState(id ? notes.find(note => note.id === id) : { title: "", body: "", id: "" });
     const [selectedId, setSelectedId] = useState(id);
     const [isLoading, setIsLoading] = useState(false);
-    useEffect(() => {
-        async function fetchData() {
-            setIsLoading(true);
-            const myNotes = await axios.get("/notes");
-            setIsLoading(false)
-            console.log(myNotes.data);
-        }
-
-    });
     const ref = useRef();
     const history = useHistory();
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true);
+            const notes = await axios.get("/notes");
+            setNotes(notes.data);
+            console.log(notes.data);
+            setIsLoading(false);
+        }
+        fetchData();
+    }, []);
 
     const setCurrentNote = (note) => {
         if (!note.id && !note.title && !note.body) {
@@ -47,7 +41,7 @@ const Main = () => {
             setSelectedId(note.id);
         }
     }
-    const updateNote = async (id, title, body, action) => {
+    const updateNote = (id, title, body, action) => {
         ref.current.scrollTo({ top: 0, behavior: "smooth" });
         let updatedNotes;
         switch (action) {
@@ -55,34 +49,36 @@ const Main = () => {
                 updatedNotes = notes.map(note => note.id === id ? { ...note, body, updatedAt: new Date() } : note);
                 const note = updatedNotes.find(note => note.id === id);
                 console.log(note);
-                setIsLoading(true);
-                try {
-                    await axios.post("/notes", {
-                        id: note.id,
-                        title: note.title,
-                        body: note.body,
-                        createdAt: note.createdAt,
-                        updatedAt: note.updatedAt
-                    });
-                } catch (e) {
-                    console.log(e.response.data)
-                }
 
-                setIsLoading(false);
+
+                axios.patch(`/notes/${note._id}`, {
+                    id: note.id,
+                    title: note.title,
+                    body: note.body,
+                    createdAt: note.createdAt,
+                    updatedAt: note.updatedAt
+                }).then(res => {
+                    console.log(res.data);
+
+                });
+
+
                 setNotes(updatedNotes);
                 return;
             case "title":
                 updatedNotes = notes.map(note => note.id === id ? { ...note, title, updatedAt: new Date() } : note);
                 const nota = updatedNotes.find(note => note.id === id);
-                setIsLoading(true);
-                await axios.post("/notes", {
+
+                axios.patch(`/notes/${nota._id}`, {
                     id: nota.id,
                     title: nota.title,
                     body: nota.body,
                     createdAt: nota.createdAt,
                     updatedAt: nota.updatedAt
-                });
-                setIsLoading(false);
+                }).then(res => {
+                    console.log(res.data);
+
+                })
                 setNotes(updatedNotes);
                 return;
             default:
@@ -90,19 +86,23 @@ const Main = () => {
         }
     }
 
-    const createNote = async () => {
+    const createNote = () => {
         let note = { title: "", body: "", id: uuid(), createdAt: new Date(), updatedAt: new Date() };
-
+        axios.post("/notes", note).then(res => { note._id = res.data._id; })
         setNotes([note, ...notes]);
         setCurrentNote(note);
     }
 
-    const deleteNote = (id) => {
+    const deleteNote = async (id) => {
         let newNotes = notes.filter(note => note.id !== id);
+        let note = notes.find(note => note.id === id);
+        axios.delete(`/notes/${note._id}`).then(res => console.log(res.data));
         setNotes(newNotes);
     }
 
     if (!auth.token) return <Redirect to="/login" />
+    if (isLoading) return <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}><Spinner /></div>
+
     return (
         <div className={styles.container}>
             <Sidebar setCurrentNote={setCurrentNote} currentNote={currentNote} notes={notes} createNote={createNote} ref={ref} selectedId={selectedId} />
@@ -111,9 +111,6 @@ const Main = () => {
                 :
                 <Placeholder />
             }
-            <Statusbar>
-                {isLoading ? "Syncing..." : "All Changes Synced"}
-            </Statusbar>
         </div>
     )
 }
