@@ -1,0 +1,80 @@
+.overlay {
+    background-color: hsla(222, 15%, 13%, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    z-index: 9;
+}
+
+.modal {
+    background-color: var(--primary);
+    color: white;
+    max-width: 70rem;
+    max-height: 40rem;
+    border-radius: 1rem;
+    border: 0.4rem solid var(--theme);
+    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.4);
+    /* padding: 0.3rem; */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.3rem;
+    position: relative;
+    height: 20%;    
+    background-color: var(--theme);
+
+}
+
+.icon {
+    color: var(--primary);
+    font-size: 2rem;
+    width: 3rem;
+    text-align: center;
+}
+
+.button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: var(--primary);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 3rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    color: var(--primary);
+}
+
+/* .header::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto; 
+    margin-right: auto;
+    content: "";
+    display: block;
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.05);
+    width: 95%;
+} */
+
+.body {
+    /* overflow: auto;
+    font-size: 8rem;
+    height: 80%; */
+    padding: 0.3rem;
+    /* border: 1px solid red; */
+}

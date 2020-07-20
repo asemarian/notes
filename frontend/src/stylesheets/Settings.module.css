@@ -1,0 +1,104 @@
+.container {
+    height: 30rem;
+    width: 60rem;
+    overflow: auto;
+    padding: 0.5rem;
+}
+
+.section {
+    position: relative;
+    /* margin-bottom: 1rem; */
+    min-height: 12rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid cyan; */
+}
+
+.section:not(:last-child)::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto; 
+    margin-right: auto;
+    content: "";
+    display: block;
+    width: 90%;
+    border-top: 0.1rem solid var(--secondary-005);
+}
+
+.section > p {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+/* 
+.title {
+    font-size: 2rem;
+    text-align: center;
+    margin: 2rem;
+} */
+
+.box {
+    border: 0.1rem solid var(--theme);
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    width: 45rem;
+    /* margin: 0 auto; */
+    text-align: center;
+    overflow: auto;
+}
+
+
+
+
+
+
+.toggle {
+    font-size: 1.5rem;
+    font-family: inherit;
+    padding: 2rem 3.5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: var(--primary);
+    color: var(--secondary);
+    border: 0.3rem solid var(--theme);
+    transition: background 0.2s linear;
+}
+
+.light {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-right: none;
+}
+
+.dark {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-left: none;
+}
+
+.selected {
+    background-color: var(--theme);
+}
+
+
+
+.button {
+    background-color: var(--theme);
+    color: var(--secondary);
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1.5rem;
+    width: 30rem;
+    padding: 1.2rem 0.8rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem auto;
+    cursor: pointer;
+    transition: border 0.2s linear;
+}

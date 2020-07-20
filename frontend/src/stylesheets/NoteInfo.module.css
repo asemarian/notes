@@ -1,0 +1,32 @@
+.container {
+    height: 20rem;
+    width: 60rem;
+    overflow: auto;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.box {
+        border: 0.1rem solid var(--theme);
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    width: 45rem;
+    /* margin: 0 auto; */
+    text-align: center;
+    overflow: auto;
+}
+
+.date {
+    grid-column: 1 / -1;
+}
+
+.stat1 {
+    grid-column: 1 / 2;  
+}
+
+.stat2 {
+    grid-column: 2 / 3;  
+}

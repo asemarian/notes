@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Form from '../components/Form';
 import styles from '../stylesheets/Signup.module.css';
 import { Link, Redirect } from 'react-router-dom';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../context/AuthContext';
 
 const Signup = () => {
     const { token } = useContext(AuthContext);

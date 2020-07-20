@@ -18,7 +18,7 @@ const ListItem = ({ note: { title, body }, setCurrentNote, id, selected }) => {
             className={selected ? `${styles.selected} ${styles.container}` : `${styles.container}`}
             onClick={handleClick} ref={ref}
         >
-            <h1 className={styles.title}>{title || "Untitled Note"}</h1>
+            <p className={styles.title}>{title || "Untitled Note"}</p>
             <p className={styles.body}>{body || "No Additional Text"}</p>
         </div>
     )

@@ -1,5 +1,5 @@
 .container {
-    height: calc(100vh - 6rem);
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,7 @@
 
 .text {
     font-size: 3rem;
-    color: #fafafa15;
+    color: var(--placeholder);
 }
 
 .button {

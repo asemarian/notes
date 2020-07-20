@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from '../stylesheets/Note.module.css';
 
-const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCurrentNote }) => {
+const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCurrentNote, toggleInfo }) => {
     const [noteTitle, setNoteTitle] = useState(title);
     const [noteBody, setNoteBody] = useState(body);
 
@@ -29,7 +29,7 @@ const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCur
     return (
         <div className={styles.container}>
             <div className={styles.toolbar}>
-                <button className={styles.button} title="Note Info">
+                <button className={styles.button} title="Note Info" onClick={toggleInfo}>
                     <i className="fas fa-info-circle"></i>
                 </button>
                 <button onClick={handleDelete} className={styles.button} title="Delete Note">

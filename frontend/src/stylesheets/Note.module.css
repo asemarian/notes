@@ -5,7 +5,7 @@
 }
 
 .toolbar {
-    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.123);
+    border-bottom: 0.1rem solid var(--secondary-01);
     height: 6rem;
     padding: 1rem 1.5rem;
     display: flex;
@@ -14,7 +14,7 @@
 
 .wrapper::after {
     content: "";
-    border-top: 0.1rem solid #a5a0a01a;
+    border-top: 0.1rem solid var(--secondary-01);
     width: 95%;
     margin: 0 auto;
     display: block;
@@ -22,7 +22,7 @@
 
 .title {
     background-color: var(--primary);
-    color: white;
+    color: var(--secondary);
     font-family: inherit;
     font-size: 3rem;
     padding: 0 5rem;
@@ -34,7 +34,7 @@
 }
 
 .body {
-    color: white;
+    color: var(--secondary);
     background-color: var(--primary);
     font-size: 2rem;
     font-family: inherit;

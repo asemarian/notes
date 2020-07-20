@@ -23,8 +23,21 @@
 
 :root {
   --primary: #1d2027;
+  --hover: #252931;
   --secondary: #DEDDE3;
+  --secondary-05: #ffffff80;
+  --secondary-01: #ffffff1a;
+  --secondary-005: #ffffff0d;
+  --primary: #FFFFFF;
+  --hover: #BEBCC8;
+  /* --secondary: #242325;
+  --secondary-05: #24232580;
+  --secondary-01: hsla(270, 3%, 14%, 0.1);
+  --secondary-005: hsla(270, 3%, 14%, 0.05);
   --theme: #7500A3;
+  --placeholder: rgba(36, 35, 37, 0.15);
+  --summary: #ffffff;
+  --summary-transparent: hsla(0, 0%, 100%, 0.6); */
   font-size: 62.5%;
   font-family: "Raleway",
     sans-serif;

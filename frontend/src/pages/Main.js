@@ -1,14 +1,18 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../context/AuthContext';
 import styles from '../stylesheets/Main.module.css';
 import Note from '../components/Note';
 import Sidebar from '../components/Sidebar';
 import Placeholder from '../components/Placeholder';
+import Modal from '../components/Modal';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import { useLocation, useHistory } from 'react-router-dom';
 import Spinner from '../components/Spinner';
+import Settings from '../components/Settings';
+import useModal from '../hooks/useModal';
+import NoteInfo from '../components/NoteInfo';
 
 const Main = () => {
     const auth = useContext(AuthContext);
@@ -20,16 +24,18 @@ const Main = () => {
     const [isLoading, setIsLoading] = useState(false);
     const ref = useRef();
     const history = useHistory();
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            const notes = await axios.get("/notes");
-            setNotes(notes.data);
-            console.log(notes.data);
-            setIsLoading(false);
-        }
-        fetchData();
-    }, []);
+    const { isShowing, toggle } = useModal();
+    const { isShowing: infoIsShowing, toggle: toggleInfo } = useModal();
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         setIsLoading(true);
+    //         const notes = await axios.get("/notes");
+    //         setNotes(notes.data);
+    //         console.log(notes.data);
+    //         setIsLoading(false);
+    //     }
+    //     fetchData();
+    // }, []);
 
     const setCurrentNote = (note) => {
         if (!note.id && !note.title && !note.body) {
@@ -105,9 +111,15 @@ const Main = () => {
 
     return (
         <div className={styles.container}>
-            <Sidebar setCurrentNote={setCurrentNote} currentNote={currentNote} notes={notes} createNote={createNote} ref={ref} selectedId={selectedId} />
+            <Modal isShowing={isShowing} toggle={toggle} title="Your Preferences" icon="cog">
+                <Settings />
+            </Modal>
+            <Modal isShowing={infoIsShowing} toggle={toggleInfo} title="Note Info" icon="info-circle">
+                <NoteInfo />
+            </Modal>
+            <Sidebar setCurrentNote={setCurrentNote} currentNote={currentNote} notes={notes} createNote={createNote} ref={ref} selectedId={selectedId} toggle={toggle} />
             {currentNote.title || currentNote.body || currentNote.id ?
-                <Note setCurrentNote={setCurrentNote} currentNote={currentNote} updateNote={updateNote} deleteNote={deleteNote} selectedId={selectedId} />
+                <Note setCurrentNote={setCurrentNote} currentNote={currentNote} updateNote={updateNote} deleteNote={deleteNote} selectedId={selectedId} toggleInfo={toggleInfo} />
                 :
                 <Placeholder />
             }

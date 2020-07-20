@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import styles from '../stylesheets/Form.module.css';
 import Spinner from './Spinner';
-import AuthContext from '../contexts/AuthContext';
+import AuthContext from '../context/AuthContext';
 
 const Form = ({ action }) => {
     const [username, setUsername] = useState("");

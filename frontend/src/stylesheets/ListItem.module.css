@@ -22,11 +22,11 @@
     content: "";
     display: block;
     width: 90%;
-    border-top: 0.1rem solid rgba(255, 255, 255, 0.05);
+    border-top: 0.1rem solid var(--secondary-005);
 }
 
 .container:not(.selected):hover {
-    background-color: #252931;
+    background-color: var(--hover);
 }
 
 .selected {
@@ -35,7 +35,9 @@
 
 .title {
     height: 2.4rem;
-    color: rgba(255, 255, 255, 0.95);
+    font-size: 2rem;
+    font-family: inherit;
+    color: var(--summary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -43,7 +45,7 @@
 
 .body {
     font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--summary-transparent);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

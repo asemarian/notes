@@ -1,8 +1,8 @@
 .container {
     width: 100%;
     height: 100vh;
-    font-size: 20rem;
-    color: #fafafa15;
+    font-size: 15rem;
+    color: var(--placeholder);
     display: grid;
     place-items: center;
 }
