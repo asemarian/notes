@@ -29,3 +29,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.sidebar_mobile {
+    width: 100%;
+    border: none;
+}
+
+.list_mobile {
+    width: 100%;
+}

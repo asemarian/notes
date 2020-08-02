@@ -5,9 +5,9 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styles from '../styles/Sidebar.module.css';
 import '../styles/slide.css';
 
-const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, toggle }, ref) => {
+const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, toggle, isMobile }, ref) => {
     return (
-        <div className={styles.sidebar} >
+        <div className={`${styles.sidebar} ${isMobile ? styles.sidebar_mobile : ""}`} >
             <div className={styles.toolbar}>
                 <button className={styles.button} title="Your Preferences" onClick={toggle}>
                     <i className="fas fa-cog"></i>
@@ -16,7 +16,7 @@ const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, to
                     <i className="fas fa-plus"></i>
                 </button>
             </div>
-            <div className={styles.list} ref={ref}>
+            <div className={`${styles.list} ${isMobile ? styles.list_mobile : ""}`} ref={ref}>
                 <TransitionGroup component={null}>
                     {notes.sort((a, b) => a.updatedAt > b.updatedAt ? -1 : 1).map((note, i) =>
                         <CSSTransition timeout={300} classNames="slide" key={note.id}>

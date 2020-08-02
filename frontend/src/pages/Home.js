@@ -30,12 +30,7 @@ const Home = () => {
     const [isInfoShowing, toggleInfo] = useModal();
     // const [isMobile, setIsMobile] = useState(false);
     const { width } = useWindowSize();
-    console.log(width)
-    if (width < 800) {
-        console.log("we're going MOBILE!");
-    }
-    // width <= 750 ? setIsMobile(true) : setIsMobile(false);
-    // console.log(isMobile)
+
     // useEffect(() => {
     //     const fetchData = async () => {
     //         setIsLoading(true);
@@ -58,7 +53,7 @@ const Home = () => {
 
 
     const updateNote = (id, title, body) => {
-        ref.current.scrollTo({ top: 0, behavior: "smooth" });
+        if (width >= 775) ref.current.scrollTo({ top: 0, behavior: "smooth" });
         let updatedNotes;
 
         updatedNotes = notes.map(note => note.id === id ? { ...note, title, body, updatedAt: (new Date()).getTime() } : note);
@@ -162,10 +157,12 @@ const Home = () => {
                     toggle={toggleSettings}
                     title="Your Settings"
                     icon="cog"
+                    isMobile={width < 775}
                 >
                     <Settings
                         logOut={logOut}
                         syncStatus={syncStatus}
+                        isMobile={width < 775}
                     />
                 </Modal>
             </CSSTransition>
@@ -181,28 +178,53 @@ const Home = () => {
                     toggle={toggleInfo}
                     title="Note Info"
                     icon="info-circle"
+                    isMobile={width < 775}
                 >
-                    <NoteInfo notes={notes} id={currentNote.id} />
+                    <NoteInfo notes={notes} id={currentNote.id} isMobile={width < 775} />
                 </Modal>
             </CSSTransition>
-            <Sidebar
-                setCurrentNote={setCurrentNote}
-                currentNote={currentNote}
-                notes={notes}
-                createNote={createNote}
-                ref={ref}
-                toggle={toggleSettings}
-            />
-            {currentNote.title || currentNote.body || currentNote.id ?
-                <Note
-                    setCurrentNote={setCurrentNote}
-                    currentNote={currentNote}
-                    updateNote={updateNote}
-                    deleteNote={deleteNote}
-                    toggleInfo={toggleInfo}
-                />
-                :
-                <NotePlaceholder />
+            {width < 775 ?
+                (currentNote.title || currentNote.body || currentNote.id) ?
+                    <Note
+                        setCurrentNote={setCurrentNote}
+                        currentNote={currentNote}
+                        updateNote={updateNote}
+                        deleteNote={deleteNote}
+                        toggleInfo={toggleInfo}
+                        isMobile={width < 775}
+                    />
+                    :
+                    <Sidebar
+                        setCurrentNote={setCurrentNote}
+                        currentNote={currentNote}
+                        notes={notes}
+                        createNote={createNote}
+                        ref={ref}
+                        toggle={toggleSettings}
+                        isMobile={width < 775}
+                    /> :
+                <>
+                    <Sidebar
+                        setCurrentNote={setCurrentNote}
+                        currentNote={currentNote}
+                        notes={notes}
+                        createNote={createNote}
+                        ref={ref}
+                        toggle={toggleSettings}
+                    />
+                    {(currentNote.title || currentNote.body || currentNote.id) ?
+                        <Note
+                            setCurrentNote={setCurrentNote}
+                            currentNote={currentNote}
+                            updateNote={updateNote}
+                            deleteNote={deleteNote}
+                            toggleInfo={toggleInfo}
+                        />
+                        :
+                        <NotePlaceholder />
+                    }
+                </>
+
             }
         </div>
     )

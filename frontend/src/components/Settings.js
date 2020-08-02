@@ -3,7 +3,7 @@ import styles from '../styles/Settings.module.css';
 import { ThemeContext } from '../context/theme';
 
 
-const Settings = ({ logOut, syncStatus }) => {
+const Settings = ({ logOut, syncStatus, isMobile }) => {
     const { darkMode, setDarkMode } = useContext(ThemeContext);
 
     const handleClick = (e) => {
@@ -15,7 +15,7 @@ const Settings = ({ logOut, syncStatus }) => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${isMobile ? styles.container_mobile : ''}`}>
             <div className={styles.section}>
                 <p className={styles.title}>Username</p>
                 <div className={styles.box}>

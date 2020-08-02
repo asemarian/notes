@@ -1,5 +1,5 @@
 .container {
-    height: 22rem;
+    height: 18rem;
     width: 60rem;
     overflow: auto;
     padding: 0.5rem;
@@ -10,10 +10,45 @@
 
 .box {
     border: 0.1rem solid var(--theme);
-    padding: 1rem 1.5rem;
+    width: 100%;
+    height: calc(95% / 3);
     font-size: 2rem;
     border-radius: 0.5rem;
-    text-align: center;
     overflow: auto;
     color: var(--secondary);
+    display: grid;
+    place-items: center;
+}
+
+.stat_box {
+    border: 0.1rem solid var(--theme);
+    width: 49.7%;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    overflow: auto;
+    color: var(--secondary);
+    display: grid;
+    place-items: center;
+}
+
+.stats {
+    height: calc(95% / 3);
+    display: flex;
+    justify-content: space-between;
+}
+
+.container_mobile {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_mobile {
+    margin: 1rem;
+}
+
+.stats_mobile {
+    width: 100%;
+    margin: 1rem 0;
 }

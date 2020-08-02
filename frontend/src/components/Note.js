@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Note.module.css';
 
-const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCurrentNote, toggleInfo }) => {
+const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCurrentNote, toggleInfo, isMobile }) => {
     const [noteTitle, setNoteTitle] = useState(title);
     const [noteBody, setNoteBody] = useState(body);
     const ref = useRef();
@@ -30,6 +30,11 @@ const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCur
     return (
         <div className={styles.container}>
             <div className={styles.toolbar}>
+                {isMobile ?
+                    <button className={styles.button} title="Go Back" onClick={() => setCurrentNote({ title: "", body: "", id: "" })}>
+                        <i className="fas fa-chevron-left"></i>
+                    </button> : null
+                }
                 <button className={styles.button} title="Note Info" onClick={toggleInfo}>
                     <i className="fas fa-info-circle"></i>
                 </button>
