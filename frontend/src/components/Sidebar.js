@@ -1,9 +1,11 @@
 import React, { forwardRef } from 'react';
 import ListItem from './ListItem';
 import ListPlaceholder from './ListPlaceholder';
-import styles from '../stylesheets/Sidebar.module.css';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import styles from '../styles/Sidebar.module.css';
+import '../styles/slide.css';
 
-const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, selectedId, toggle }, ref) => {
+const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, toggle }, ref) => {
     return (
         <div className={styles.sidebar} >
             <div className={styles.toolbar}>
@@ -15,15 +17,20 @@ const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, se
                 </button>
             </div>
             <div className={styles.list} ref={ref}>
-                {!notes.length ? <ListPlaceholder /> : notes.sort((a, b) => a.updatedAt > b.updatedAt ? -1 : 1).map((note, i) => {
-                    return <ListItem
-                        note={note}
-                        setCurrentNote={setCurrentNote}
-                        key={i}
-                        id={note.id}
-                        selected={note.id === selectedId ? true : false}
-                    />
-                })}
+                <TransitionGroup component={null}>
+                    {notes.sort((a, b) => a.updatedAt > b.updatedAt ? -1 : 1).map((note, i) =>
+                        <CSSTransition timeout={300} classNames="slide" key={note.id}>
+                            <ListItem
+                                note={note}
+                                setCurrentNote={setCurrentNote}
+                                key={i}
+                                id={note.id}
+                                selected={note.id === currentNote.id}
+                            />
+                        </CSSTransition>
+                    )}
+                </TransitionGroup>
+                {notes.length === 0 && <ListPlaceholder />}
             </div>
         </div>
     )

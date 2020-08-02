@@ -5,7 +5,7 @@
 }
 
 .toolbar {
-    border-bottom: 0.1rem solid var(--secondary-01);
+    border-bottom: 0.1rem solid var(--border-dark);
     height: 6rem;
     padding: 1rem 1.5rem;
     display: flex;
@@ -14,7 +14,7 @@
 
 .wrapper::after {
     content: "";
-    border-top: 0.1rem solid var(--secondary-01);
+    border-top: 0.1rem solid var(--border-light);
     width: 95%;
     margin: 0 auto;
     display: block;

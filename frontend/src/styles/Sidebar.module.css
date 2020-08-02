@@ -1,5 +1,5 @@
 .toolbar {
-    border-bottom: 0.1rem solid var(--secondary-01);
+    border-bottom: 0.1rem solid var(--border-dark);
     height: 6rem;
     padding: 1rem 1.5rem;
     display: flex;
@@ -10,10 +10,11 @@
     height: calc(100vh - 6rem);
     width: 35rem;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sidebar {
-    border-right: 0.1rem solid var(--secondary-01);
+    border-right: 0.1rem solid var(--border-dark);
 }
 
 .button {

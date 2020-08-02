@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from '../stylesheets/Placeholder.module.css';
+import styles from '../styles/NotePlaceholder.module.css';
 
-const Placeholder = () => {
+const NotePlaceholder = () => {
     return (
         <div className={styles.container}>
             <i className="fas fa-sticky-note" ></i>
@@ -9,4 +9,4 @@ const Placeholder = () => {
     )
 }
 
-export default Placeholder;
+export default NotePlaceholder;

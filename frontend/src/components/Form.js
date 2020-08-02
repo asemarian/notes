@@ -1,16 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import styles from '../stylesheets/Form.module.css';
+import styles from '../styles/Form.module.css';
 import Spinner from './Spinner';
-import AuthContext from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
 
 const Form = ({ action }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
-    const { setToken } = useContext(AuthContext);
+    const { setToken } = useAuth();
 
     const handleChange = (e) => {
         if (e.target.type === "text") {
@@ -30,13 +29,14 @@ const Form = ({ action }) => {
         setIsLoading(true);
 
         try {
-            const { data: { token } } = await axios.post(`/users/${action}`, {
+            const { data: { token, username: user } } = await axios.post(`/users/${action}`, {
                 username,
                 password
             });
-            setIsLoading(false);
             setToken(token);
             localStorage.setItem("token", token);
+            localStorage.setItem("username", user);
+            setIsLoading(false);
         } catch (e) {
             setIsLoading(false);
             setMessage(e.response.status === 500 ? e.response.statusText : e.response.data.error);

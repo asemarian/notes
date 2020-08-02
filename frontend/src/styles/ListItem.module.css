@@ -22,7 +22,7 @@
     content: "";
     display: block;
     width: 90%;
-    border-top: 0.1rem solid var(--secondary-005);
+    border-top: 0.1rem solid var(--border-light);
 }
 
 .container:not(.selected):hover {
@@ -31,12 +31,14 @@
 
 .selected {
     background-color: var(--theme); 
+    color: #ffffff;
 }
 
 .title {
     height: 2.4rem;
     font-size: 2rem;
     font-family: inherit;
+    font-weight: bold;
     color: var(--summary);
     white-space: nowrap;
     overflow: hidden;

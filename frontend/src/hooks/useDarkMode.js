@@ -1,23 +1,35 @@
 import { useState } from 'react';
 
 const useDarkMode = () => {
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+    const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem("theme") || true);
 
-    const setDarkMode = (mode) => {
-        if (mode === "dark") {
-            document.documentElement.style.setProperty('--primary', '#1d2027');
-            document.documentElement.style.setProperty('--secondary', '#DEDDE3');
-            setTheme("dark");
+    const setDarkMode = (bool) => {
+        if (bool) {
+            document.documentElement.style.setProperty('--primary', '#1f1f1f');
+            document.documentElement.style.setProperty('--secondary', '#ffffff');
+            document.documentElement.style.setProperty('--text', '#ffffff');
+            document.documentElement.style.setProperty('--placeholder', '#ffffff0d');
+            document.documentElement.style.setProperty('--border-light', '#ffffff0d');
+            document.documentElement.style.setProperty('--border-dark', '#ffffff1a');
+            document.documentElement.style.setProperty('--overlay', '#262626bf');
+            document.documentElement.style.setProperty('--hover', '#272727');
+            setIsDarkMode(bool);
             localStorage.setItem("theme", "dark");
         } else {
-            document.documentElement.style.setProperty('--primary', '#DEDDE3');
-            document.documentElement.style.setProperty('--secondary', '#1d2027');
-            setTheme("light");
+            document.documentElement.style.setProperty('--primary', '#ffffff');
+            document.documentElement.style.setProperty('--secondary', '#1f1f1f');
+            document.documentElement.style.setProperty('--text', '#2c2c2c');
+            document.documentElement.style.setProperty('--placeholder', '#1f1f1f33');
+            document.documentElement.style.setProperty('--border-light', '#1f1f1f26');
+            document.documentElement.style.setProperty('--border-dark', '#1f1f1f4d');
+            document.documentElement.style.setProperty('--overlay', '#ededed99');
+            document.documentElement.style.setProperty('--hover', '#ececec');
+            setIsDarkMode(bool);
             localStorage.setItem("theme", "light");
         }
     }
 
-    return { theme, setDarkMode };
+    return { darkMode: isDarkMode, setDarkMode };
 
 }
 

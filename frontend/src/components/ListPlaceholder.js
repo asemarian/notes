@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../stylesheets/ListPlaceholder.module.css';
+import styles from '../styles/ListPlaceholder.module.css';
 
 const ListPlaceholder = () => {
     return (

@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import styles from '../stylesheets/Note.module.css';
+import React, { useState, useEffect, useRef } from 'react';
+import styles from '../styles/Note.module.css';
 
 const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCurrentNote, toggleInfo }) => {
     const [noteTitle, setNoteTitle] = useState(title);
     const [noteBody, setNoteBody] = useState(body);
+    const ref = useRef();
 
     useEffect(() => {
         setNoteTitle(title);
         setNoteBody(body);
+        ref.current.focus();
     }, [title, body, id]);
 
     const handleTitleChange = (e) => {
         setNoteTitle(e.target.value);
-        updateNote(id, e.target.value, noteBody, "title");
+        updateNote(id, e.target.value, noteBody);
     }
 
     const handleBodyChange = (e) => {
         setNoteBody(e.target.value);
-        updateNote(id, noteTitle, e.target.value, "body");
+        updateNote(id, noteTitle, e.target.value);
     }
 
     const handleDelete = () => {
@@ -37,7 +38,7 @@ const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCur
                 </button>
             </div>
             <div className={styles.wrapper}>
-                <input type="text" value={noteTitle} onChange={handleTitleChange} className={styles.title} />
+                <input type="text" value={noteTitle} onChange={handleTitleChange} className={styles.title} ref={ref} />
             </div>
             <textarea className={styles.body} onChange={handleBodyChange} value={noteBody} ></textarea>
         </div>
@@ -45,10 +46,3 @@ const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCur
 }
 
 export default Note;
-
-/* todo:
-    * save the new note whenever it changes to localstorage if user is offline
-    * add placeholder to show place of title and body
-    * make api call to store the new note, whenever it changes, to the database
-
-*/

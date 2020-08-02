@@ -13,11 +13,11 @@ const noteSchema = new mongoose.Schema({
     },
     createdAt: {
         required: true,
-        type: Date
+        type: Number
     },
     updatedAt: {
         required: true,
-        type: Date
+        type: Number
     },
     author: {
         required: true,
@@ -28,4 +28,3 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model("Note", noteSchema);
 
 module.exports = Note;
-

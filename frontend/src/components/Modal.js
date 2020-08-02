@@ -1,21 +1,15 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import styles from '../stylesheets/Modal.module.css';
+import styles from '../styles/Modal.module.css';
 
-const handleClick = (e) => {
-    if (e.target.className.includes("overlay")) {
-        console.log("HI")
-    }
-}
-
-const Modal = ({ isShowing, toggle, title, icon, children }) => {
+const Modal = ({ toggle, title, icon, children }) => {
     const handleClick = (e) => {
         if (e.target.className.includes("overlay")) {
             toggle();
         }
     }
-    return isShowing ? createPortal(
-        <div className={styles.overlay} onClick={handleClick}>
+    return createPortal(
+        <div className={styles.overlay} onClick={handleClick} >
             <div className={styles.modal}>
                 <div className={styles.header}>
                     <i className={`fas fa-${icon ? icon : "sticky-note"} ${styles.icon}`}></i>
@@ -29,7 +23,7 @@ const Modal = ({ isShowing, toggle, title, icon, children }) => {
                 </div>
             </div>
         </div>
-        , document.body) : null
+        , document.body);
 
 }
 

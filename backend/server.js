@@ -1,19 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
-
+const helmet = require('helmet');
 const noteRouter = require('./routes/notes');
 const userRouter = require('./routes/users');
-
 const app = express();
 
-mongoose.connect("mongodb://127.0.0.1:27017/notes-db", {
+mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
 app.use(express.json());
+app.use(helmet());
 app.use(noteRouter);
 app.use(userRouter);
 
-app.listen(8080, () => console.log("Server is up and listening on 8080"));
+app.listen(process.env.PORT, () => console.log(`Server is listening on port ${process.env.PORT}`));

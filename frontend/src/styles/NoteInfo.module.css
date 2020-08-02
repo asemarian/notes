@@ -1,0 +1,19 @@
+.container {
+    height: 22rem;
+    width: 60rem;
+    overflow: auto;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.box {
+    border: 0.1rem solid var(--theme);
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    overflow: auto;
+    color: var(--secondary);
+}

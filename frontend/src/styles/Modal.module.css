@@ -1,5 +1,4 @@
 .overlay {
-    background-color: hsla(222, 15%, 13%, 0.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -15,10 +14,9 @@
     color: white;
     max-width: 70rem;
     max-height: 40rem;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     border: 0.4rem solid var(--theme);
-    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.4);
-    /* padding: 0.3rem; */
+    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.7);
 }
 
 .header {
@@ -29,7 +27,6 @@
     position: relative;
     height: 20%;    
     background-color: var(--theme);
-
 }
 
 .icon {
@@ -56,25 +53,4 @@
     place-items: center;
     padding: 1rem;
     color: var(--primary);
-}
-
-/* .header::after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-left: auto; 
-    margin-right: auto;
-    content: "";
-    display: block;
-    border-top: 0.1rem solid rgba(255, 255, 255, 0.05);
-    width: 95%;
-} */
-
-.body {
-    /* overflow: auto;
-    font-size: 8rem;
-    height: 80%; */
-    padding: 0.3rem;
-    /* border: 1px solid red; */
 }

@@ -9,15 +9,15 @@ router.post("/users/signup", async (req, res) => {
     try {
         let user = await User.findOne({ username: req.body.username });
         if (user) return res.status(400).send({ error: "Username already taken" });
-        if (req.body.password.length < 4) return res.status(400).send({ error: "Password should be at least 4 characters long" });
+        if (req.body.username.length < 4) return res.status(400).send({ error: "Username must be at least 4 characters long" });
+        if (req.body.password.length < 4) return res.status(400).send({ error: "Password must be at least 4 characters long" });
         user = new User(req.body);
         const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
         user.tokens.push(token);
         await user.save();
         res.json({ username: user.username, token });
     } catch (e) {
-        console.log(e.message)
-        res.status(500).send();
+        res.status(500).send({ error: e.message });
     }
 });
 
@@ -30,26 +30,41 @@ router.post("/users/login", async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
         user.tokens.push(token);
         await user.save();
-        res.send({ username: user.username, token });
+        res.json({ username: user.username, token });
     } catch (e) {
-        res.status(500).send();
+        res.status(500).send({ error: e.message });
     }
 });
 
 router.post("/users/logout", auth, async (req, res) => {
     req.user.tokens = req.user.tokens.filter(token => token !== req.token);
     await req.user.save();
-    res.send({
-        success: "User successfully logged out"
-    });
+    res.send({ message: "User successfully logged out" });
 });
 
-router.post("/users/logoutAll", auth, async (req, res) => {
+router.post("/users/logout-everywhere", auth, async (req, res) => {
     req.user.tokens = [];
     await req.user.save();
-    res.send({
-        success: "User successfully logged out on all devices"
-    });
+    res.send({ message: "User successfully logged out on all devices" });
+});
+
+router.post("/users/validate-token", async (req, res) => {
+    try {
+        const token = req.get("Authorization").replace("Bearer ", "");
+        const { id } = jwt.verify(token, process.env.SECRET_KEY);
+        const user = await User.findById(id);
+        if (user && user.tokens.includes(token)) {
+            res.json({
+                isValid: true
+            });
+        } else {
+            res.json({
+                isValid: false
+            });
+        }
+    } catch (e) {
+        res.status(401).send({ error: e.message });
+    }
 });
 
 module.exports = router;

@@ -1,20 +1,16 @@
-import React, { useState, useContext } from 'react';
-import styles from '../stylesheets/Settings.module.css';
-import ThemeContext from '../context/ThemeContext';
+import React, { useContext } from 'react';
+import styles from '../styles/Settings.module.css';
+import { ThemeContext } from '../context/theme';
 
 
-const Settings = () => {
-    const { theme, setDarkMode } = useContext(ThemeContext);
-    // const [isDarkMode, setIsDarkMode] = useState(true);
+const Settings = ({ logOut, syncStatus }) => {
+    const { darkMode, setDarkMode } = useContext(ThemeContext);
 
     const handleClick = (e) => {
-        if (e.target.textContent === "Light") {
-            setDarkMode("light");
-            // setIsDarkMode(false);
+        if (e.target.textContent === "Dark") {
+            setDarkMode(true);
         } else {
-            // setIsDarkMode(true);
-            setDarkMode("dark");
-
+            setDarkMode(false);
         }
     }
 
@@ -23,26 +19,28 @@ const Settings = () => {
             <div className={styles.section}>
                 <p className={styles.title}>Username</p>
                 <div className={styles.box}>
-                    asemarianasemarian
+                    {localStorage.getItem("username") || ""}
                 </div>
             </div>
             <div className={styles.section}>
                 <p className={styles.title}>Status</p>
-                <div className={styles.box}>Last sync at June 21st, 2020, 06:30 PM</div>
+                <div className={styles.box}>
+                    {syncStatus}
+                </div>
             </div>
             <div className={styles.section}>
                 <p className={styles.title}>Theme</p>
                 <div>
-                    <button onClick={handleClick} className={`${styles.toggle} ${styles.light} ${theme === "light" ? styles.selected : ""}`}>Light</button>
-                    <button onClick={handleClick} className={`${styles.toggle} ${styles.dark} ${theme === "dark" ? styles.selected : ""} `}>Dark</button>
+                    <button onClick={handleClick} className={`${styles.toggle} ${styles.light} ${!darkMode ? styles.selected : ""}`}>Light</button>
+                    <button onClick={handleClick} className={`${styles.toggle} ${styles.dark} ${darkMode ? styles.selected : ""} `}>Dark</button>
                 </div>
 
 
             </div>
             <div className={styles.section}>
                 <p className={styles.title}>Log Out</p>
-                <button className={styles.button}>Log Out</button>
-                <button className={styles.button}>Log Out Everywhere</button>
+                <button className={styles.button} onClick={logOut}>Log Out</button>
+                <button className={styles.button} onClick={logOut}>Log Out Everywhere</button>
             </div>
         </div>
     )

@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
-import Form from '../components/Form';
-import styles from '../stylesheets/Login.module.css';
+import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
+import Form from '../components/Form';
+import styles from '../styles/Login.module.css';
+import useAuth from '../hooks/useAuth';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Login = () => {
-    const { token } = useContext(AuthContext);
+    const { token } = useAuth();
+    useDocumentTitle("Log in to Notes");
+
     return (
         token ? <Redirect to="/notes" /> :
             <div className={styles.container}>
@@ -14,13 +17,12 @@ const Login = () => {
                 </div>
                 <h1 className={styles.title}>Log In</h1>
                 <Form action="login" />
-                <hr className={styles.partition} />
+                <div className={styles.partition}></div>
                 <p className={styles.paragraph}>
                     Don't have an account? <Link to="/signup">Sign up.</Link>
                 </p>
             </div>
     )
-
 }
 
 export default Login;

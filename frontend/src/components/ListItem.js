@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styles from '../stylesheets/ListItem.module.css';
+import styles from '../styles/ListItem.module.css';
 
 const ListItem = ({ note: { title, body }, setCurrentNote, id, selected }) => {
     const ref = useRef();
@@ -16,7 +16,8 @@ const ListItem = ({ note: { title, body }, setCurrentNote, id, selected }) => {
     return (
         <div
             className={selected ? `${styles.selected} ${styles.container}` : `${styles.container}`}
-            onClick={handleClick} ref={ref}
+            onClick={handleClick}
+            ref={ref}
         >
             <p className={styles.title}>{title || "Untitled Note"}</p>
             <p className={styles.body}>{body || "No Additional Text"}</p>

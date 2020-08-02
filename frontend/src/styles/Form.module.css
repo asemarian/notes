@@ -7,13 +7,13 @@
 
 .input {
     padding: 1.2rem 0.8rem;
-    border: 0.1rem solid var(--secondary);
+    border: 0.1rem solid #cecece;
     border-radius: 0.5rem;
     outline: none;
     color: var(--secondary);
     font-size: 1.5rem;
     font-family: inherit;
-    background-color: var(--primary);
+    background-color: transparent;
     margin: 0.5rem 0;
     transition: border 0.2s linear;
 }
@@ -24,7 +24,7 @@
 
 .button {
     background-color: var(--theme);
-    color: var(--secondary);
+    color: #ffffff;
     border: 0.1rem solid transparent;
     outline: none;
     font-family: inherit;
@@ -37,10 +37,6 @@
     transition: border 0.2s linear;
 }
 
-.button:focus {
-    border: 0.1rem solid var(--secondary);
-}
-
 .message {
     height: 3rem;
     display: flex;
@@ -49,7 +45,7 @@
 }
 
 .message>p {
-    color: #ff4040;
+    color: var(--warning);
     font-size: 1.3rem;
 }
 
