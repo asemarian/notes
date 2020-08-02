@@ -43,9 +43,9 @@ const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCur
                 </button>
             </div>
             <div className={styles.wrapper}>
-                <input type="text" value={noteTitle} onChange={handleTitleChange} className={styles.title} ref={ref} />
+                <input type="text" value={noteTitle} onChange={handleTitleChange} className={`${styles.title} ${isMobile ? styles.title_mobile : ''}`} ref={ref} />
             </div>
-            <textarea className={styles.body} onChange={handleBodyChange} value={noteBody} ></textarea>
+            <textarea className={`${styles.body} ${isMobile ? styles.body_mobile : ''}`} onChange={handleBodyChange} value={noteBody} ></textarea>
         </div>
     )
 }

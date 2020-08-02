@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styles from '../styles/Form.module.css';
 import Spinner from './Spinner';
 import useAuth from '../hooks/useAuth';
+import styles from '../styles/Form.module.css';
 
 const Form = ({ action }) => {
     const [username, setUsername] = useState("");

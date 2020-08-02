@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ListItem from './ListItem';
 import ListPlaceholder from './ListPlaceholder';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styles from '../styles/Sidebar.module.css';
-import '../styles/slide.css';
+import '../styles/_transitions.css';
 
 const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, toggle, isMobile }, ref) => {
     return (
@@ -34,6 +34,6 @@ const Sidebar = forwardRef(({ setCurrentNote, currentNote, notes, createNote, to
             </div>
         </div>
     )
-})
+});
 
 export default Sidebar;

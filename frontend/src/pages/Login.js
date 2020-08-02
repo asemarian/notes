@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Form from '../components/Form';
-import styles from '../styles/Login.module.css';
 import useAuth from '../hooks/useAuth';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import styles from '../styles/Login.module.css';
 
 const Login = () => {
     const { token } = useAuth();
     useDocumentTitle("Log in to Notes");
 
     return (
-        token ? <Redirect to="/notes" /> :
+        token ? <Redirect to="/" /> :
             <div className={styles.container}>
                 <div className={styles.logo}>
                     <i className="fas fa-sticky-note" ></i>

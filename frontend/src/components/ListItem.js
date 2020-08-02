@@ -4,12 +4,8 @@ import styles from '../styles/ListItem.module.css';
 const ListItem = ({ note: { title, body }, setCurrentNote, id, selected }) => {
     const ref = useRef();
 
-    const handleClick = (e) => {
-        setCurrentNote({
-            title,
-            body,
-            id
-        });
+    const handleClick = () => {
+        setCurrentNote({ title, body, id });
         ref.current.scrollIntoView({ behavior: "smooth" });
     }
 

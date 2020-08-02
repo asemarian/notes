@@ -59,3 +59,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.title_mobile {
+    padding: 0 2rem
+}
+
+.body_mobile {
+    padding: 2rem;
+}

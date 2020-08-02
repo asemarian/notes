@@ -11,7 +11,6 @@ const useDarkMode = () => {
             document.documentElement.style.setProperty('--placeholder', '#ffffff0d');
             document.documentElement.style.setProperty('--border-light', '#ffffff0d');
             document.documentElement.style.setProperty('--border-dark', '#ffffff1a');
-            document.documentElement.style.setProperty('--overlay', '#262626bf');
             document.documentElement.style.setProperty('--hover', '#272727');
             setIsDarkMode(bool);
             localStorage.setItem("theme", "dark");
@@ -22,7 +21,6 @@ const useDarkMode = () => {
             document.documentElement.style.setProperty('--placeholder', '#1f1f1f33');
             document.documentElement.style.setProperty('--border-light', '#1f1f1f26');
             document.documentElement.style.setProperty('--border-dark', '#1f1f1f4d');
-            document.documentElement.style.setProperty('--overlay', '#ededed99');
             document.documentElement.style.setProperty('--hover', '#ececec');
             setIsDarkMode(bool);
             localStorage.setItem("theme", "light");
@@ -30,7 +28,6 @@ const useDarkMode = () => {
     }
 
     return { darkMode: isDarkMode, setDarkMode };
-
 }
 
 export default useDarkMode;

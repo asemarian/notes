@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import styles from '../styles/Home.module.css';
+import { CSSTransition } from 'react-transition-group';
+import { v4 as uuid } from 'uuid';
+import axios from 'axios';
 import Note from '../components/Note';
 import Sidebar from '../components/Sidebar';
 import NotePlaceholder from '../components/NotePlaceholder';
@@ -8,123 +10,102 @@ import Modal from '../components/Modal';
 import Spinner from '../components/Spinner';
 import Settings from '../components/Settings';
 import NoteInfo from '../components/NoteInfo';
-import { v4 as uuid } from 'uuid';
-import axios from 'axios';
 import useModal from '../hooks/useModal';
 import useAuth from '../hooks/useAuth';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import useWindowSize from '../hooks/useWindowSize';
-import { CSSTransition } from 'react-transition-group';
-import '../styles/appear.css';
-
+import styles from '../styles/Home.module.css';
+import '../styles/_transitions.css';
 
 const Home = () => {
     const { token, setToken } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [notes, setNotes] = useState([]);
     const [currentNote, setCurrentNote] = useState({ title: "", body: "", id: "" });
-    const [syncStatus, setSyncStatus] = useState(null);
-    const ref = useRef();
-    const history = useHistory();
+    const [syncStatus, setSyncStatus] = useState("");
     const [isSettingsShowing, toggleSettings] = useModal();
     const [isInfoShowing, toggleInfo] = useModal();
-    // const [isMobile, setIsMobile] = useState(false);
+    const ref = useRef();
+    const history = useHistory();
     const { width } = useWindowSize();
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         setIsLoading(true);
-    //         try {
-    //             const { data } = await axios.get("/notes");
-    //             setNotes(data);
-    //             setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
-    //         } catch (e) {
-    //             setSyncStatus(`Error fetching your notes from the server.`);
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     }
-
-    //     fetchData();
-    // }, []);
 
     useDocumentTitle("Your Notes");
 
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                const { data } = await axios.get("/notes");
+                setNotes(data);
+                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+            } catch (e) {
+                setSyncStatus(`Error fetching your notes from the server.`);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchData();
+    }, []);
 
+    const createNote = () => {
+        const note = { title: "", body: "", id: uuid(), createdAt: (new Date()).getTime(), updatedAt: (new Date()).getTime() };
+
+        setSyncStatus("Syncing...");
+
+        axios.post("/notes", note)
+            .then(res => {
+                note._id = res.data._id;
+                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+            })
+            .catch(e => {
+                setSyncStatus(`Error syncing your changes.`);
+                console.error(e.response.data);
+            });
+
+        setNotes([note, ...notes]);
+        setCurrentNote(note);
+    }
 
     const updateNote = (id, title, body) => {
-        if (width >= 775) ref.current.scrollTo({ top: 0, behavior: "smooth" });
-        let updatedNotes;
+        if (width >= 775) {
+            ref.current.scrollTo({ top: 0, behavior: "smooth" });
+        }
 
-        updatedNotes = notes.map(note => note.id === id ? { ...note, title, body, updatedAt: (new Date()).getTime() } : note);
-        const note = updatedNotes.find(note => note.id === id);
+        setNotes(notes.map(note => note.id === id ? { ...note, title, body, updatedAt: (new Date()).getTime() } : note));
+        const note = notes.find(note => note.id === id);
+
         setSyncStatus("Syncing...");
+
         axios.patch(`/notes/${note._id}`, {
             id: note.id,
             title: note.title,
             body: note.body,
             createdAt: note.createdAt,
             updatedAt: note.updatedAt
-        }).then(res => {
-            console.log(res.data);
-            setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
-        }).catch(e => {
-            setSyncStatus(`Error: Could not sync.`);
-            console.error(e.response.data);
         })
-
-        // updatedNotes.sort((a, b) => Date(a.updatedAt) > Date(b.updatedAt) ? -1 : 1);
-        console.log("right after sorting", updatedNotes)
-        setNotes(updatedNotes);
-        // localStorage.setItem("notes", JSON.stringify(updatedNotes));
-
-        // updatedNotes = notes.map(note => note.id === id ? { ...note, title, updatedAt: new Date() } : note);
-        // const nota = updatedNotes.find(note => note.id === id);
-
-        // axios.patch(`/notes/${nota._id}`, {
-        //     id: nota.id,
-        //     title: nota.title,
-        //     body: nota.body,
-        //     createdAt: nota.createdAt,
-        //     updatedAt: nota.updatedAt
-        // }).then(res => {
-        //     console.log(res.data);
-
-        // })
-        // setNotes(updatedNotes);
-
-    }
-
-    const createNote = () => {
-        let note = { title: "", body: "", id: uuid(), createdAt: (new Date()).getTime(), updatedAt: (new Date()).getTime() };
-        setSyncStatus("Syncing...");
-        axios.post("/notes", note).then(res => {
-            note._id = res.data._id;
-            setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
-        }).catch(e => {
-            setSyncStatus(`Error: Could not sync.`);
-            console.error(e.response.data);
-        });
-        setNotes([note, ...notes]);
-        // localStorage.setItem("notes", JSON.stringify([note, ...notes]));
-
-        setCurrentNote(note);
+            .then(() => {
+                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+            })
+            .catch(e => {
+                setSyncStatus(`Error syncing your changes.`);
+                console.error(e.response.data);
+            });
     }
 
     const deleteNote = async (id) => {
-        let newNotes = notes.filter(note => note.id !== id);
-        let note = notes.find(note => note.id === id);
-        setSyncStatus("Syncing...");
-        axios.delete(`/notes/${note._id}`).then(res => {
-            console.log(res.data);
-            setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
-        }).catch(e => {
-            setSyncStatus(`Error: Could not sync.`);
-            console.error(e.response.data);
-        })
-        // localStorage.setItem("notes", JSON.stringify(newNotes));
+        const note = notes.find(note => note.id === id);
+        setNotes(notes.filter(note => note.id !== id));
 
-        setNotes(newNotes);
+        setSyncStatus("Syncing...");
+
+        axios.delete(`/notes/${note._id}`)
+            .then(() => {
+                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+            })
+            .catch(e => {
+                setSyncStatus(`Error syncing your changes.`);
+                console.error(e.response.data);
+            });
     }
 
     const logOut = async (e) => {
@@ -136,11 +117,12 @@ const Home = () => {
             await axios.post("/users/logout-everywhere");
         }
 
+        setToken("");
         localStorage.setItem("token", "");
         localStorage.setItem("username", "");
-        setToken("");
         history.push("/login");
     }
+
     if (!token) return <Redirect to="/login" />
     if (isLoading) return <div className={styles.spinner}><Spinner /></div>
 
@@ -149,7 +131,7 @@ const Home = () => {
             <CSSTransition
                 in={isSettingsShowing}
                 timeout={300}
-                classNames="appear"
+                classNames="fade"
                 unmountOnExit
             >
                 <Modal
@@ -170,7 +152,7 @@ const Home = () => {
             <CSSTransition
                 in={isInfoShowing}
                 timeout={300}
-                classNames="appear"
+                classNames="fade"
                 unmountOnExit
             >
                 <Modal
@@ -183,6 +165,7 @@ const Home = () => {
                     <NoteInfo notes={notes} id={currentNote.id} isMobile={width < 775} />
                 </Modal>
             </CSSTransition>
+
             {width < 775 ?
                 (currentNote.title || currentNote.body || currentNote.id) ?
                     <Note
@@ -224,7 +207,6 @@ const Home = () => {
                         <NotePlaceholder />
                     }
                 </>
-
             }
         </div>
     )

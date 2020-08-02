@@ -9,7 +9,6 @@
     position: relative;
     cursor: pointer;
     transition: background 0.2s ease-in-out;
-    width: 35rem;
     width: 100%;
 }  
 
@@ -21,7 +20,6 @@
     margin-left: auto; 
     margin-right: auto;
     content: "";
-    display: block;
     width: calc(100% - 2vw);
     border-top: 0.1rem solid var(--border-light);
 }
@@ -38,9 +36,7 @@
 .title {
     height: 2.4rem;
     font-size: 2rem;
-    font-family: inherit;
     font-weight: bold;
-    color: var(--summary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -48,7 +44,7 @@
 
 .body {
     font-size: 1.5rem;
-    color: var(--summary-transparent);
+    opacity: 0.8;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

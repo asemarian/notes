@@ -8,6 +8,7 @@ const Modal = ({ toggle, title, icon, children, isMobile }) => {
             toggle();
         }
     }
+
     return createPortal(
         <div className={styles.overlay} onClick={handleClick} >
             <div className={`${styles.modal} ${isMobile ? styles.modal_mobile : ''}`}>
@@ -24,7 +25,6 @@ const Modal = ({ toggle, title, icon, children, isMobile }) => {
             </div>
         </div>
         , document.body);
-
 }
 
 export default Modal;

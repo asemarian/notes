@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
   margin: 0;
@@ -28,32 +28,13 @@
   --warning: #ff4040;
   --primary: #1f1f1f;
   --secondary: #ffffff;
-  /* --secondary: #1f1f1f; */
-
   --text: #ffffff;
   --placeholder: #ffffff0d;
-  /* --placeholder: #1f1f1f33; */
-  /* --text: #2c2c2c; */
   --border-light: #ffffff0d;
   --border-dark: #ffffff1a;  
-  
-  /* --border-light: #1f1f1f26;
-  --border-dark: #1f1f1f4d; */
-
-  /* --overlay: #ededed99; */
-  --overlay: #262626bf;
-  /* --primary: #1d2027;
-  --primary: #15171a; */
-
-/* switch primary and secondary, change text, placeholder colors */
   --hover: #272727;
-  /* --hover: #ececec; */
-
-  /* --partition: hsla(0, 0%, 12%, 0.3); */
-  /* --primary: #FFFFFF;
-  --hover: #BEBCC8; */
   font-size: 62.5%;
-  font-family: "Raleway", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 ::selection {

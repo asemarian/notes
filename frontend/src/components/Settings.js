@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import styles from '../styles/Settings.module.css';
 import { ThemeContext } from '../context/theme';
-
+import styles from '../styles/Settings.module.css';
 
 const Settings = ({ logOut, syncStatus, isMobile }) => {
     const { darkMode, setDarkMode } = useContext(ThemeContext);
@@ -25,17 +24,15 @@ const Settings = ({ logOut, syncStatus, isMobile }) => {
             <div className={styles.section}>
                 <p className={styles.title}>Status</p>
                 <div className={styles.box}>
-                    {syncStatus}
+                    {syncStatus || "Not available"}
                 </div>
             </div>
             <div className={styles.section}>
                 <p className={styles.title}>Theme</p>
                 <div>
-                    <button onClick={handleClick} className={`${styles.toggle} ${styles.light} ${!darkMode ? styles.selected : ""}`}>Light</button>
-                    <button onClick={handleClick} className={`${styles.toggle} ${styles.dark} ${darkMode ? styles.selected : ""} `}>Dark</button>
+                    <button onClick={handleClick} className={`${styles.switch} ${styles.light} ${!darkMode ? styles.selected : ""}`}>Light</button>
+                    <button onClick={handleClick} className={`${styles.switch} ${styles.dark} ${darkMode ? styles.selected : ""} `}>Dark</button>
                 </div>
-
-
             </div>
             <div className={styles.section}>
                 <p className={styles.title}>Log Out</p>
