@@ -71,7 +71,7 @@ const Home = () => {
             ref.current.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        setNotes(notes.map(note => note.id === id ? { ...note, title, body, updatedAt: (new Date()).getTime() } : note));
+        setNotes(notes.map(note => note.id === id ? { ...note, title: title || note.title, body: body || note.body, updatedAt: (new Date()).getTime() } : note));
         const note = notes.find(note => note.id === id);
 
         setSyncStatus("Syncing...");
@@ -80,7 +80,6 @@ const Home = () => {
             id: note.id,
             title: note.title,
             body: note.body,
-            createdAt: note.createdAt,
             updatedAt: note.updatedAt
         })
             .then(() => {

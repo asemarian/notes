@@ -14,12 +14,12 @@ const Note = ({ currentNote: { title, body, id }, updateNote, deleteNote, setCur
 
     const handleTitleChange = (e) => {
         setNoteTitle(e.target.value);
-        updateNote(id, e.target.value, noteBody);
+        updateNote(id, e.target.value, undefined);
     }
 
     const handleBodyChange = (e) => {
         setNoteBody(e.target.value);
-        updateNote(id, noteTitle, e.target.value);
+        updateNote(id, undefined, e.target.value);
     }
 
     const handleDelete = () => {
