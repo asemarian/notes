@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "redux": "^4.0.5",
-    "react-redux": "^7.2.0"
+    "bcrypt": "^4.0.1",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.16"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
   },
   "scripts": {
-    "start": "concurrently \"cd backend && npm run start\" \"cd frontend && npm start\" "
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",

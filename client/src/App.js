@@ -17,7 +17,7 @@ export default function App() {
   }, [setDarkMode]);
 
   useEffect(() => {
-    axios.post("/users/validate-token", { token })
+    axios.post("/api/users/validate-token", { token })
       .then(({ data: { isValid } }) => {
         if (!isValid) {
           setToken("");
