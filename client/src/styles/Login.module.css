@@ -23,7 +23,7 @@
 
 .partition {
     width: 30rem;
-    border-top: 0.1rem solid #cecece;
+    border-top: 0.1rem solid var(--border-light);
 }
 
 .paragraph {
