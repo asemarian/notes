@@ -71,16 +71,16 @@ const Home = () => {
             ref.current.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        setNotes(notes.map(note => note.id === id ? { ...note, title: title || note.title, body: body || note.body, updatedAt: (new Date()).getTime() } : note));
         const note = notes.find(note => note.id === id);
+        const newNote = {...note, title: title || note.title, body: body || note.body, updatedAt: (new Date()).getTime() };
 
         setSyncStatus("Syncing...");
 
-        axios.patch(`/notes/${note._id}`, {
-            id: note.id,
-            title: note.title,
-            body: note.body,
-            updatedAt: note.updatedAt
+        axios.patch(`/notes/${newNote._id}`, {
+            id: newNote.id,
+            title: newNote.title,
+            body: newNote.body,
+            updatedAt: newNote.updatedAt
         })
             .then(() => {
                 setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
@@ -89,6 +89,8 @@ const Home = () => {
                 setSyncStatus(`Error syncing your changes.`);
                 console.error(e.response.data);
             });
+
+        setNotes(notes.map(note => note.id === id ? newNote : note));
     }
 
     const deleteNote = async (id) => {
