@@ -6,7 +6,7 @@ const noteRouter = require('./routes/notes');
 const userRouter = require('./routes/users');
 const app = express();
 
-mongoose.connect(process.env.MONGODB_URL, {
+mongoose.connect('mongodb://127.0.0.1:27017', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -15,8 +15,8 @@ mongoose.connect(process.env.MONGODB_URL, {
 
 app.use(express.json());
 app.use(helmet());
-app.use('/api/notes', noteRouter);
-app.use('/api/users', userRouter);
+app.use(noteRouter);
+app.use(userRouter);
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
     app.use(express.static('client/build'));
@@ -25,4 +25,4 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     });
 }
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => console.log("starting server"));

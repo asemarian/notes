@@ -29,7 +29,7 @@ const Form = ({ action }) => {
         setIsLoading(true);
 
         try {
-            const { data: { token, username: user } } = await axios.post(`/api/users/${action}`, {
+            const { data: { token, username: user } } = await axios.post(`/users/${action}`, {
                 username,
                 password
             });

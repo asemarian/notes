@@ -35,7 +35,7 @@ const Home = () => {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const { data } = await axios.get("/api/notes");
+                const { data } = await axios.get("/notes");
                 setNotes(data);
                 setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
             } catch (e) {
@@ -52,7 +52,7 @@ const Home = () => {
 
         setSyncStatus("Syncing...");
 
-        axios.post("/api/notes", note)
+        axios.post("/notes", note)
             .then(res => {
                 note._id = res.data._id;
                 setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
@@ -76,7 +76,7 @@ const Home = () => {
 
         setSyncStatus("Syncing...");
 
-        axios.patch(`/api/notes/${note._id}`, {
+        axios.patch(`/notes/${note._id}`, {
             id: note.id,
             title: note.title,
             body: note.body,
@@ -98,7 +98,7 @@ const Home = () => {
 
         setSyncStatus("Syncing...");
 
-        axios.delete(`/api/notes/${note._id}`)
+        axios.delete(`/notes/${note._id}`)
             .then(() => {
                 setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
             })
@@ -112,9 +112,9 @@ const Home = () => {
         setIsLoading(true);
 
         if (e.target.textContent === "Log Out") {
-            await axios.post("/api/users/logout");
+            await axios.post("/users/logout");
         } else {
-            await axios.post("/api/users/logout-everywhere");
+            await axios.post("/users/logout-everywhere");
         }
 
         setToken("");

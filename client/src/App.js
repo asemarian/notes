@@ -13,11 +13,11 @@ export default function App() {
   const { darkMode, setDarkMode } = useDarkMode();
 
   useEffect(() => {
-    setDarkMode(localStorage.getItem("theme") === "dark");
+    setDarkMode(localStorage.getItem("theme") !== "light");
   }, [setDarkMode]);
 
   useEffect(() => {
-    axios.post("/api/users/validate-token", { token })
+    axios.post("/users/validate-token", { token })
       .then(({ data: { isValid } }) => {
         if (!isValid) {
           setToken("");
