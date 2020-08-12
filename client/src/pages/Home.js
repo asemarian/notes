@@ -38,7 +38,7 @@ const Home = () => {
             try {
                 const { data } = await axios.get("/notes");
                 setNotes(data);
-                setSyncStatus(`Last sync ${moment().fromNow()}`);
+                setSyncStatus(`Last synced: ${moment().calendar()}`);
             } catch (e) {
                 setSyncStatus(`Error fetching your notes from the server.`);
             } finally {
@@ -56,7 +56,7 @@ const Home = () => {
         axios.post("/notes", note)
             .then(res => {
                 note._id = res.data._id;
-                setSyncStatus(`Last sync ${moment().fromNow()}`);
+                setSyncStatus(`Last synced: ${moment().calendar()}`);
             })
             .catch(e => {
                 setSyncStatus(`Error syncing your changes.`);
@@ -84,7 +84,7 @@ const Home = () => {
             updatedAt: newNote.updatedAt
         })
             .then(() => {
-                setSyncStatus(`Last sync ${moment().fromNow()}`);
+                setSyncStatus(`Last synced: ${moment().calendar()}`);
             })
             .catch(e => {
                 setSyncStatus(`Error syncing your changes.`);
@@ -102,7 +102,7 @@ const Home = () => {
 
         axios.delete(`/notes/${note._id}`)
             .then(() => {
-                setSyncStatus(`Last sync ${moment().fromNow()}`);
+                setSyncStatus(`Last synced: ${moment().calendar()}`);
             })
             .catch(e => {
                 setSyncStatus(`Error syncing your changes.`);
