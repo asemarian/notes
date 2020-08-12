@@ -3,6 +3,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
+import moment from 'moment';
 import Note from '../components/Note';
 import Sidebar from '../components/Sidebar';
 import NotePlaceholder from '../components/NotePlaceholder';
@@ -37,7 +38,7 @@ const Home = () => {
             try {
                 const { data } = await axios.get("/notes");
                 setNotes(data);
-                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+                setSyncStatus(`Last sync ${moment().fromNow()}`);
             } catch (e) {
                 setSyncStatus(`Error fetching your notes from the server.`);
             } finally {
@@ -55,7 +56,7 @@ const Home = () => {
         axios.post("/notes", note)
             .then(res => {
                 note._id = res.data._id;
-                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+                setSyncStatus(`Last sync ${moment().fromNow()}`);
             })
             .catch(e => {
                 setSyncStatus(`Error syncing your changes.`);
@@ -72,7 +73,7 @@ const Home = () => {
         }
 
         const note = notes.find(note => note.id === id);
-        const newNote = {...note, title: title || note.title, body: body || note.body, updatedAt: (new Date()).getTime() };
+        const newNote = { ...note, title: title || note.title, body: body || note.body, updatedAt: (new Date()).getTime() };
 
         setSyncStatus("Syncing...");
 
@@ -83,7 +84,7 @@ const Home = () => {
             updatedAt: newNote.updatedAt
         })
             .then(() => {
-                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+                setSyncStatus(`Last sync ${moment().fromNow()}`);
             })
             .catch(e => {
                 setSyncStatus(`Error syncing your changes.`);
@@ -101,7 +102,7 @@ const Home = () => {
 
         axios.delete(`/notes/${note._id}`)
             .then(() => {
-                setSyncStatus(`Last sync ${(new Date()).toLocaleString()}`);
+                setSyncStatus(`Last sync ${moment().fromNow()}`);
             })
             .catch(e => {
                 setSyncStatus(`Error syncing your changes.`);

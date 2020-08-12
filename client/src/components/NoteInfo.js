@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import wordCounter from '../utils/wordCounter';
 import charCounter from '../utils/charCounter';
 import styles from '../styles/NoteInfo.module.css';
@@ -11,10 +12,20 @@ const NoteInfo = ({ notes, id, isMobile }) => {
     return (
         <div className={`${styles.container} ${isMobile ? styles.container_mobile : ''}`}>
             <div className={`${styles.box} ${isMobile ? styles.box_mobile : ''}`}>
-                Created {(new Date(createdAt)).toLocaleString()}
+                Created {moment(createdAt).calendar(null, {
+                sameDay: '[today at] h:mm A',
+                lastDay: '[yesterday at] h:mm A',
+                lastWeek: '[last] dddd, MMMM Do, YYYY [at] h:mm A',
+                sameElse: '[on] MMMM Do, YYYY [at] h:mm A'
+            })}
             </div>
             <div className={`${styles.box} ${isMobile ? styles.box_mobile : ''}`}>
-                Modified {(new Date(updatedAt)).toLocaleString()}
+                Modified {moment(updatedAt).calendar(null, {
+                sameDay: function () { return `[${this.fromNow()}]` },
+                lastDay: '[yesterday at] h:mm:ss A',
+                lastWeek: '[last] dddd, MMMM Do, YYYY [at] hh:mm:ss A',
+                sameElse: '[on] MMMM Do, YYYY [at] hh:mm A'
+            })}
             </div>
             <div className={`${styles.stats} ${isMobile ? styles.stats_mobile : ''}`}>
                 <div className={`${styles.stat_box} ${isMobile ? styles.stat_box_mobile : ''}`}>
