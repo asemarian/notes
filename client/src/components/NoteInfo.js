@@ -11,7 +11,7 @@ const NoteInfo = ({ notes, id, isMobile }) => {
 
     return (
         <div className={`${styles.container} ${isMobile ? styles.container_mobile : ''}`}>
-            <div className={`${styles.box} ${isMobile ? styles.box_mobile : ''}`}>
+            <div className={`${isMobile ? styles.box_mobile : ''}`}>
                 Created {moment(createdAt).calendar(null, {
                 sameDay: '[today at] h:mm A',
                 lastDay: '[yesterday at] h:mm A',
@@ -19,7 +19,7 @@ const NoteInfo = ({ notes, id, isMobile }) => {
                 sameElse: '[on] MMMM Do, YYYY [at] h:mm A'
             })}
             </div>
-            <div className={`${styles.box} ${isMobile ? styles.box_mobile : ''}`}>
+            <div className={`${isMobile ? styles.box_mobile : ''}`}>
                 Modified {moment(updatedAt).calendar(null, {
                 sameDay: function () { return `[${this.fromNow()}]` },
                 lastDay: '[yesterday at] h:mm:ss A',
@@ -27,14 +27,12 @@ const NoteInfo = ({ notes, id, isMobile }) => {
                 sameElse: '[on] MMMM Do, YYYY [at] hh:mm A'
             })}
             </div>
-            <div className={`${styles.stats} ${isMobile ? styles.stats_mobile : ''}`}>
-                <div className={`${styles.stat_box} ${isMobile ? styles.stat_box_mobile : ''}`}>
+            <div className={`${isMobile ? styles.box_mobile : ''}`}>
                     {`${words} ${words === 1 ? "Word" : "Words"}`}
                 </div>
-                <div className={`${styles.stat_box} ${isMobile ? styles.stat_box_mobile : ''}`}>
+            <div className={`${isMobile ? styles.box_mobile : ''}`}>
                     {`${chars} ${chars === 1 ? "Character" : "Characters"}`}
                 </div>
-            </div>
         </div>
     )
 }
