@@ -143,6 +143,19 @@ const Home = () => {
 		history.push("/login");
 	};
 
+	const deleteAccount = async () => {
+		setIsLoading(true);
+		try {
+			await axios.delete("/users/");
+			setToken("");
+			localStorage.clear();
+			history.push("/login");
+		} catch (e) {
+			alert("Error");
+			console.error(e);
+		}
+	};
+
 	if (!token) return <Redirect to="/login" />;
 	if (isLoading)
 		return (
@@ -168,6 +181,7 @@ const Home = () => {
 				>
 					<Settings
 						logOut={logOut}
+						deleteAccount={deleteAccount}
 						syncStatus={syncStatus}
 						isMobile={width < 775}
 					/>

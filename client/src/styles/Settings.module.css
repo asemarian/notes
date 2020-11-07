@@ -1,105 +1,109 @@
 .container {
-    height: 30rem;
-    width: 60rem;
-    overflow: auto;
-    padding: 0.5rem;
+	height: 30rem;
+	width: 60rem;
+	overflow: auto;
+	padding: 0.5rem;
 }
 
 .section {
-    position: relative;
-    min-height: 12rem;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+	position: relative;
+	min-height: 12rem;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .section:not(:last-child)::after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-left: auto; 
-    margin-right: auto;
-    content: "";
-    display: block;
-    width: 90%;
-    border-top: 0.1rem solid var(--border-light);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	content: "";
+	display: block;
+	width: 90%;
+	border-top: 0.1rem solid var(--border-light);
 }
 
 .title {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: var(--secondary);
-    font-weight: bold;
+	font-size: 1.8rem;
+	margin-bottom: 1rem;
+	color: var(--secondary);
+	font-weight: bold;
 }
 
 .box {
-    border: 0.1rem solid var(--theme);
-    padding: 1rem 1.5rem;
-    font-size: 2rem;
-    border-radius: 0.5rem;
-    width: 45rem;
-    text-align: center;
-    overflow: auto;
-    color: var(--secondary);
+	border: 0.1rem solid var(--theme);
+	padding: 1rem 1.5rem;
+	font-size: 2rem;
+	border-radius: 0.5rem;
+	width: 45rem;
+	text-align: center;
+	overflow: auto;
+	color: var(--secondary);
 }
 
 .switch {
-    font-size: 1.5rem;
-    font-family: inherit;
-    padding: 2rem 3.5rem;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-color: var(--primary);
-    color: var(--secondary);
-    border: 0.3rem solid var(--theme);
-    transition: background 0.2s linear;
+	font-size: 1.5rem;
+	font-family: inherit;
+	padding: 2rem 3.5rem;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background-color: var(--primary);
+	color: var(--secondary);
+	border: 0.3rem solid var(--theme);
+	transition: background 0.2s linear;
 }
 
 .light {
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    border-right: none;
+	border-top-left-radius: 1rem;
+	border-bottom-left-radius: 1rem;
+	border-right: none;
 }
 
 .dark {
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    border-left: none;
+	border-top-right-radius: 1rem;
+	border-bottom-right-radius: 1rem;
+	border-left: none;
 }
 
 .selected {
-    background-color: var(--theme);
-    color: #ffffff;
+	background-color: var(--theme);
+	color: #ffffff;
 }
 
 .button {
-    background-color: var(--theme);
-    color: #ffffff;
-    border: none;
-    outline: none;
-    font-family: inherit;
-    font-size: 1.5rem;
-    width: 30rem;
-    padding: 1.2rem 0.8rem;
-    border-radius: 0.5rem;
-    margin: 0.5rem auto;
-    cursor: pointer;
+	background-color: var(--theme);
+	color: #ffffff;
+	border: none;
+	outline: none;
+	font-family: inherit;
+	font-size: 1.5rem;
+	width: 30rem;
+	padding: 1.2rem 0.8rem;
+	border-radius: 0.5rem;
+	margin: 0.5rem auto;
+	cursor: pointer;
+}
+
+.button.delete {
+	background-color: var(--warning);
 }
 
 .container_mobile {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 @media (max-width: 500px) {
-    .box {
-        width: 80%;
-    }
-    .button {
-        width: 80%;
-    }
+	.box {
+		width: 80%;
+	}
+	.button {
+		width: 80%;
+	}
 }
