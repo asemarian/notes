@@ -15,6 +15,10 @@ router.post("/users/signup", async (req, res) => {
 			return res
 				.status(400)
 				.send({ error: "Username must be at least 4 characters long" });
+		if (!/^[a-z0-9_]*$/i.test(req.body.username))
+			return res.status(400).send({
+				error: "Username cannot contain special characters",
+			});
 		if (req.body.password.length < 4)
 			return res
 				.status(400)
