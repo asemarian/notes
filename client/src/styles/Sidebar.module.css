@@ -1,40 +1,56 @@
 .toolbar {
-    border-bottom: 0.1rem solid var(--border-dark);
-    height: 6rem;
-    padding: 1rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
+	border-bottom: 0.1rem solid var(--border-dark);
+	height: 6rem;
+	padding: 1rem 1.5rem;
+	display: flex;
+	justify-content: space-between;
+}
+
+.container {
+	display: flex;
 }
 
 .list {
-    height: calc(100vh - 6rem);
-    width: 35rem;
-    overflow-y: auto;
-    overflow-x: hidden;
+	height: calc(100vh - 6rem);
+	width: 35rem;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
-.sidebar {
-    border-right: 0.1rem solid var(--border-dark);
+.resizer {
+	width: 0.7rem;
+	background-color: var(--border-dark);
+	transition: width 0.2s ease-out, background 0.1s ease-in-out;
+}
+
+.resizer:hover,
+.resizer:active {
+	width: 1.2rem;
+	cursor: col-resize;
+}
+
+.resizer:active {
+	background-color: var(--border-light);
 }
 
 .button {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: var(--theme);
-    font-size: 2.5rem;
-    cursor: pointer;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: var(--theme);
+	font-size: 2.5rem;
+	cursor: pointer;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .sidebar_mobile {
-    width: 100%;
-    border: none;
+	width: 100%;
+	border: none;
 }
 
 .list_mobile {
-    width: 100%;
+	width: 100%;
 }
