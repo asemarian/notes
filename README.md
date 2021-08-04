@@ -6,9 +6,7 @@ Notes is a minimalist, plain-text, fullstack web application for creating and ke
 
 ## Description
 
-This is my first full-stack web application. It had to be a note-taking app because I'm constantly taking notes, but also because I've wanted a free and simple note-taking application that I could quickly access and use online wherever I was. There's a lot more that is yet to be done (see below), but I'm happy with the way this one turned out.
-
-Features include:
+This is my first full-stack web application. It had to be a note-taking app because I'm constantly taking notes, but also because I've always wanted a free and simple note-taking application that I could quickly access and use online wherever I was. There's a lot more that is yet to be done (see below), but some of the features include:
 
 -   Dark mode support
 -   Fully responsive design
@@ -40,7 +38,7 @@ This is a MERN stack application. Here's a breakdown of the technologies used:
 
 ## Contributing
 
-This is a work in progress. My ultimate goal is to turn this web application into a cross-platform desktop application that supports Linux in particular. Before that happens, however, there are a few features that need to be implemented first:
+This is a work in progress. The ultimate goal is to turn this web application into a cross-platform desktop application that supports Linux in particular. Before that happens, however, there are a few features that need to be implemented first:
 
 -   [ ] Add support for multiple notebooks
 -   [ ] Add the ability to search through all notes
