@@ -5,7 +5,6 @@ const helmet = require('helmet');
 const noteRouter = require('./routes/notes');
 const userRouter = require('./routes/users');
 const app = express();
-
 mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
